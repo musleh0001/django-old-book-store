@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="https://www.freeiconspng.com/uploads/books-book-icon-024815--icons-etc-23.png" /> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Peralta" />
+        <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        
+        <title>{% block title %}Hello, world!{% endblock %}</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center logo my-4">
+                <a href="#">Old Book Store</a>
+            </h1>
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </body>
+</html>
