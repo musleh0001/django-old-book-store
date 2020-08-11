@@ -4,19 +4,7 @@
 First, clone the repository to your local machine:
 
 ```bash
-git clone git@github.com:sibtc/django-beginners-guide.git
-```
-
-Install the requirements:
-
-```bash
-pip install -r requirements.txt
-```
-
-Setup the local configurations:
-
-```bash
-cp .env.example .env
+git clone git@github.com:musleh0001/django-old-book-store.git
 ```
 
 Create the database:
