@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete - {{ books.title }} {% endblock %}
+
+{% block content %}
+    <div class="container my-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'book_list' %}">Book List</a></li>
+            <li class="breadcrumb-item">Delete - {{ books.title }}</li>
+        </ol>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="alert alert-warning" role="alert">
+                        Are you sure to delete {{ books.title }} ?
+                    </div>
+                    <button type="submit" class="btn btn-outline-danger">Yes, delete it</button>
+                    <a class="btn btn-outline-success" href="{% url 'book_detail' books.pk %}">No, just I've tried the delete button</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

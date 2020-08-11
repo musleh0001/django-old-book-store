@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Old Book Store{% endblock %}
+
+{% block navbar %}
+    <a class="btn btn-outline-info" href="{% url 'book_new' %}">Sell Book</a>
+    <!-- <a class="btn btn-outline-info ml-3" href="/api/">API</a> -->
+    <a class="btn btn-outline-info ml-3" href="{% url 'my_posts' %}">My Post</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container my-3">
+        <div class="breadcrumb">
+            <li class="breadcrumb-item">Book List</li>
+        </div>
+    </div>
+    {% if messsages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- carousel -->
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <h2 class="ml-5 mt-5">LATEST BOOKS</h2>
+            {% for book in books %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %} ">
+                    <a href="{% url 'book_detail' book.pk %}"><img src="media/{{ book.image }}" alt="Book Image" class="d-block ml-5 my-3 mb-5" style="width: 1200px; height: 400px;"></a>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!-- ./carousel -->
+
+
+    <!-- listing book start -->
+    <div class="list"></div>
+    <h2 class="ml-5">ALL BOOKS</h2>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            {% for book in books %}
+                    <div class="card my-3 p-2">
+                        <div class="view overlay">
+                            <img src="media/{{ book.image }}" alt="Book Image" class="card-img-top" style="height: 250px;"/>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">by <strong>{{ book.author }}</strong></p>
+                            <p class="card-text">{{ book.price }} TK</p>
+                            <p class="card-text text-muted">{{ book.created_at|naturaltime}}</p>
+                        </div>
+                        <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">see more</a>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- listing book end -->
+
+    <!-- pagination -->
+    <div class="container">
+    {% if is_paginated %}
+    <nav aria-label="Topics pagination" class="mb-4">
+        <ul class="pagination">
+            {% if page_obj.number > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">First</span>
+                </li>
+            {% endif %}
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+            {% endif %}
+
+            {% for page_num in paginator.page_range %}
+                {% if page_obj.number == page_num %}
+                    <li class="page-item active">
+                        <span class="page-link">
+                            {{ page_num }}
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+            {% endif %}
+
+            {% if page_obj.number != paginator.num_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ paginator.num_pages }}">Last</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Last</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    </div>
+
+    <!-- ./pagination -->
+
+{% endblock %}

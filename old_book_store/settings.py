@@ -124,6 +124,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+# login redirect
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'book_list'
+LOGOUT_REDIRECT_URL = 'book_list'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

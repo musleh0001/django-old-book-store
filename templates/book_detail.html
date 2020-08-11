@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} Detail {% endblock %}
+
+{% block content %}
+    <div class="container my-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'book_list' %}">Book List</a></li>
+            <li class="breadcrumb-item">Detail - {{ books.title }}</li>
+        </ol>
+    </div>
+
+    <div class="container">
+        {% if books.created_by == user %}
+            <div class="alert alert-info alet-dismissiable fade show" role="alert">
+                Welcome <strong>{{ books.created_by }}!</strong> Wanna edit post.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Name:</strong> {{ books.title }}</li>
+                    <li class="list-group-item"><strong>Author:</strong> {{ books.author }}</li>
+                    <li class="list-group-item"><strong>Genre:</strong> {{ books.genre }}</li>
+                    <li class="list-group-item"><strong>Language:</strong> {{ books.language }}</li>
+                    <li class="list-group-item"><strong>Description:</strong> {{ books.description }}</li>
+                    <li class="list-group-item"><strong>Publication:</strong> {{ books.publication }}</li>
+                    <li class="list-group-item"><strong>Price:</strong> {{ books.price }} TK</li>
+                    <li class="list-group-item"><strong>Seller Name: </strong> {{ books.created_by }}</li>
+                    <li class="list-group-item"><strong>Contact Number: </strong> {{ books.contact_number }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% if books.created_by == user %}
+    <div class="container mt-3 mb-3">
+        <div class="row top-buffer">
+            <div class="col-12">
+                <a href="{% url 'book_update' books.pk %}"><button class="btn btn-outline-success mx-2">Edit</button></a>
+                <a href="{% url 'book_delete' books.pk %}"><button class="btn btn-outline-danger">Delete</button></a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
