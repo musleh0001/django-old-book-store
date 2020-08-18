@@ -60,8 +60,9 @@
                             <p class="card-text">by <strong>{{ book.author }}</strong></p>
                             <p class="card-text">{{ book.price }} TK</p>
                             <p class="card-text text-muted">{{ book.created_at|naturaltime}}</p>
+                            <a href="#" class="btn btn-primary">add cart</a>
+                            <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">see more</a>
                         </div>
-                        <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">see more</a>
                     </div>
             {% endfor %}
         </div>
