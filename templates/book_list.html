@@ -4,9 +4,9 @@
 {% block title %}Old Book Store{% endblock %}
 
 {% block navbar %}
-    <a class="btn btn-outline-info" href="{% url 'book_new' %}">Sell Book</a>
+    <a class="btn btn-outline-info" href="{% url 'book_new' %}" data-micron="pop">Sell Book</a>
     <!-- <a class="btn btn-outline-info ml-3" href="/api/">API</a> -->
-    <a class="btn btn-outline-info ml-3" href="{% url 'my_posts' %}">My Post</a>
+    <a class="btn btn-outline-info ml-3" href="{% url 'my_posts' %}" data-micron="pop">My Post</a>
 {% endblock %}
 
 {% block content %}
@@ -28,19 +28,19 @@
         <div class="carousel-inner">
             <h2 class="ml-5 mt-5">LATEST BOOKS</h2>
             <div class="carousel-item active">
-                <a href="/detail/1/"><img src="media/image1.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/3/"><img src="media/image2.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/5/"><img src="media/image3.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/1/"><img src="media/image1.jpeg" data-aos="fade-right" data-aos-duration="1000" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/3/"><img src="media/image2.jpeg" data-aos="fade-down" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/5/"><img src="media/image3.jpeg" data-aos="fade-left" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
             </div>
             <div class="carousel-item">
-                <a href="/detail/7/"><img src="media/image4.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/9/"><img src="media/image5.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/11/"><img src="media/image6.jpg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/7/"><img src="media/image4.jpeg" data-aos="fade-right" data-aos-duration="1000" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/9/"><img src="media/image5.jpeg" data-aos="fade-down" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/11/"><img src="media/image6.jpg" data-aos="fade-left" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
             </div>
             <div class="carousel-item">
-                <a href="/detail/12/"><img src="media/image7.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/13/"><img src="media/image8.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
-                <a href="/detail/2/"><img src="media/image1.jpg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/12/"><img src="media/image7.jpeg" data-aos="fade-right" data-aos-duration="1000" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/13/"><img src="media/image8.jpeg" data-aos="fade-down" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/2/"><img src="media/image1.jpg" data-aos="fade-left" data-aos-duration="1000" alt="Book Image" style="width: 400px;height: 400px;"></a>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -61,7 +61,7 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             {% for book in books %}
-                    <div class="card my-3 p-2">
+                    <div class="card my-3 p-2" data-aos="flip-left" data-aos-duration="1000">
                         <div class="view overlay">
                             <img src="media/{{ book.image }}" alt="Book Image" class="card-img-top" style="height: 250px;"/>
                         </div>
@@ -70,8 +70,8 @@
                             <p class="card-text">by <strong>{{ book.author }}</strong></p>
                             <p class="card-text">{{ book.price }} TK</p>
                             <p class="card-text text-muted">{{ book.created_at|naturaltime}}</p>
-                            <a href="#" class="btn btn-primary">add cart</a>
-                            <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">see more</a>
+                            <a href="#" class="btn btn-primary" data-micron="pop">add cart</a>
+                            <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary" data-micron="pop">see more</a>
                         </div>
                     </div>
             {% endfor %}
