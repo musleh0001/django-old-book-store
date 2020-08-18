@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} My Post {% endblock %}
+
+{% block content %}
+    <div class="container my-3">
+        <div class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'book_list' %}">Book List</a></li>
+            <li class="breadcrumb-item">my post</li>
+        </div>
+    </div>
+
+    <!-- listing book start -->
+    <div class="list"></div>
+    <h2 class="ml-5">ALL POSTS</h2>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            {% for book in books %}
+                    <div class="card my-3 p-2">
+                        <div class="view overlay">
+                            <img src="/media/{{ book.image }}" alt="Book Image" class="card-img-top" style="height: 250px;"/>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">by <strong>{{ book.author }}</strong></p>
+                            <p class="card-text">{{ book.price }} TK</p>
+                            <p class="card-text text-muted">{{ book.created_at|naturaltime}}</p>
+                        </div>
+                        <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">see more</a>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- listing book end -->
+{% endblock %}
