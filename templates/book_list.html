@@ -27,11 +27,21 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
             <h2 class="ml-5 mt-5">LATEST BOOKS</h2>
-            {% for book in books %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %} ">
-                    <a href="{% url 'book_detail' book.pk %}"><img src="media/{{ book.image }}" alt="Book Image" class="d-block ml-5 my-3 mb-5" style="width: 1200px; height: 400px;"></a>
-                </div>
-            {% endfor %}
+            <div class="carousel-item active">
+                <a href="/detail/1/"><img src="media/image1.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/3/"><img src="media/image2.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/5/"><img src="media/image3.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="/detail/7/"><img src="media/image4.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/9/"><img src="media/image5.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/11/"><img src="media/image6.jpg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="/detail/12/"><img src="media/image7.jpeg" alt="Book Image" class="ml-5" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/13/"><img src="media/image8.jpeg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+                <a href="/detail/2/"><img src="media/image1.jpg" alt="Book Image" style="width: 400px;height: 400px;"></a>
+            </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -47,7 +57,7 @@
 
     <!-- listing book start -->
     <div class="list"></div>
-    <h2 class="ml-5">ALL BOOKS</h2>
+    <h2 class="ml-5 mt-5">ALL BOOKS</h2>
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             {% for book in books %}
