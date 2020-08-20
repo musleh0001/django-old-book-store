@@ -5,6 +5,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils import timezone
+# search
+from django.db.models import Q
 
 from .models import Book
 from .forms import BookForm
@@ -66,3 +68,12 @@ class UserPostList(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(created_by = self.request.user)
+
+def search(request):
+    template = 'search.html'
+    query = request.GET.get('q')
+    if query:
+        results = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+    else: 
+        results = {}
+    return render(request, template,{"results":results})

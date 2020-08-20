@@ -9,4 +9,5 @@ urlpatterns = [
     path('edit/<int:pk>/', views.BookUpdate.as_view(), name='book_update'),
     path('delete/<int:pk>/', views.BookDelete.as_view(), name='book_delete'),
     path('my_posts/', views.UserPostList.as_view(), name='my_posts'),
+    path('search/', views.search, name='search'),
 ]
