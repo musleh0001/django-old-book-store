@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+ <!--Main layout-->
+ <main>
+  <div class="container wow fadeIn">
+
+    <!-- Heading -->
+    <h2 class="my-5 h2 text-center">Checkout form</h2>
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-8 mb-4">
+
+        <!--Card-->
+        <div class="card">
+
+          <!--Card content-->
+          <form method="POST" class="card-body">
+              {% csrf_token %}
+              {{ form|crispy }}
+
+            <hr class="mb-4">
+            <button class="btn btn-danger" type="submit">Update Billing Address</button>
+
+          </form>
+
+        </div>
+        <a class="btn btn-primary btn-lg btn-block" href="/">Complete Order</a>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-4 mb-4">
+
+        <!-- Heading -->
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <a class="badge badge-danger badge-pill" href="{% url 'order:Cart' %}">See Your Cart</a>
+        </h4>
+
+
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </div>
+</main>
+<!--Main layout-->
+
+{% endblock content %} 

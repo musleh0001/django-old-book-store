@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('account/', include('account.urls')),
     path('api/', include('api.urls')),
+
+    path('order/',include('order.urls')),
 ]
 
 if settings.DEBUG:
