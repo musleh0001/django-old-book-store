@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!--Main layout-->
+  <main>
+    <div class="container mt-5 pt-lg-5">
+
+        <div class="table-responsive text-nowrap">
+            <h2> Your Cart </h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Genre</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Ordered Date</th>
+                  <th scope="col">Total Item Price</th>
+
+                </tr>
+              </thead>
+              <tbody>
+               {% if cart != None %}
+
+                    {% for products in cart.products.all %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td><a href="{% url 'book_detail' products.product.id %}">
+                          <b> {{ products.product.title}}</b></a></td>
+                      <td>{{ products.product.genre }}</td>
+                      <td>{{ products.product.price }}</td>
+                      <td>
+
+                          <a href="{% url 'order:RemoveCart' products.product.id %}"> 
+                            {% include 'includes/icon/minus.html'%}
+                          </a>
+                            {{products.quantity}}
+                          <a href="{% url 'order:AddToCart' products.product.id %}">
+                            {% include 'includes/icon/plus.html'%}
+                          </svg>
+
+                          </a>
+
+                      </td>
+                      <td>{{ products.order_date }}</td>
+                      <td>{{ products.get_product_price }}  
+
+                          <a class="ml-4" href="{% url 'order:DeleteCart' products.product.id %}">
+                            {% include 'includes/icon/trash.html'%}
+                          </a>
+                        </td>
+
+                      </td>
+                    </tr>
+
+                    {% endfor %}
+                    <tr>
+                      <td ><b>Order Total</b></td>
+                      <td colspan="8">
+                        
+                        <b style="margin-left: 50rem;">${{ cart.get_total_bill }} </b>
+                        
+                    </tr>
+
+                    <tr>
+                      <td colspan="8">
+                        <a class="btn btn-warning float-right ml-2" href="{% url 'order:Checkout' %}">Checkout Now</a>
+                        <a class="btn btn-outline-primary float-right" href="/">Continue Shopping</a>
+                      </td>
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                      <td colspan="8">
+                        <h2>
+                          <h1>
+                            Your Cart Is Empty
+                          </h1>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="8">
+                        <a class="btn btn-primary float-right" href="/">
+                          Continue Shopping
+                        </a>
+                      </td>
+                    </tr>
+
+               {% endif %}
+              </tbody>
+            </table>
+          
+          </div>
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  {% endblock content %}

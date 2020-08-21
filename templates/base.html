@@ -26,6 +26,15 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                        <a href="{% url 'order:Cart' %}">
+                                {% include 'includes/icon/cart.html' %}
+                            </a>
+                        </ul>
+                {% endif %}
+
                 <div class="collapse navbar-collapse" id="mainMenu">
                     {% if user.is_authenticated %}
                         <ul class="navbar-nav ml-auto">
@@ -34,7 +43,10 @@
                                     {{ user.username }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                                    <a class="dropdown-item" href="{% url 'order:Cart' %}">My Cart</a>
+
                                     <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+
                                 </div>
                             </li>
                         </ul>
