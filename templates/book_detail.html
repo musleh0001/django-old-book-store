@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %} Detail {% endblock %}
 
@@ -19,32 +20,44 @@
                 </button>
             </div>
         {% endif %}
-        <div class="row">
-            <div class="col-12">
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Name:</strong> {{ books.title }}</li>
-                    <li class="list-group-item"><strong>Author:</strong> {{ books.author }}</li>
-                    <li class="list-group-item"><strong>Genre:</strong> {{ books.genre }}</li>
-                    <li class="list-group-item"><strong>Language:</strong> {{ books.language }}</li>
-                    <li class="list-group-item"><strong>Description:</strong> {{ books.description }}</li>
-                    <li class="list-group-item"><strong>Publication:</strong> {{ books.publication }}</li>
-                    <li class="list-group-item"><strong>Price:</strong> {{ books.price }} TK</li>
-                    <li class="list-group-item"><strong>Seller Name: </strong> {{ books.created_by }}</li>
-                    <li class="list-group-item"><strong>Contact Number: </strong> {{ books.contact_number }}</li>
-                </ul>
+
+        <div class="card mb-3" style="max-width: 1200px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="/media/{{ books.image }}" class="card-img" alt="{{ books.title }}" style="width: 270px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Name:</strong> {{ books.title }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ books.author }}</p>
+                        <p class="card-text"><strong>Genre:</strong> {{ books.genre }}</p>
+                        <p class="card-text"><strong>Language:</strong> {{ books.language }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ books.description }}</p>
+                        <p class="card-text"><strong>Publication:</strong> {{ books.publication }}</p>
+                        <p class="card-text"><strong>Price:</strong> {{ books.price }}</p>
+                        <p class="card-text"><strong>Seller Name:</strong> {{ books.created_by }}</p>
+                        <p class="card-text"><strong>Contact Number:</strong> {{ books.contact_number }}</p>
+                        <p class="card-text"><small class="text-muted">posted {{ books.created_at|naturaltime }}</small></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    {% if books.created_by == user %}
+
     <div class="container mt-3 mb-3">
-        <div class="row top-buffer">
-            <div class="col-12">
-                <a href="{% url 'book_update' books.pk %}"><button class="btn btn-outline-success mx-2">Edit</button></a>
-                <a href="{% url 'book_delete' books.pk %}"><button class="btn btn-outline-danger">Delete</button></a>
+        <div class="row top-buffer" style="margin-left: 380px;">
+            <div class="col-0 ml-3">
+                <a href="{% url 'order:AddToCart' books.pk %}" class="btn btn-outline-success" data-micron="pop"><img src="/static/img/cart.png" alt="cart" style="height: 20px;"></a>
             </div>
+            {% if books.created_by == user %}
+                <div class="col-8">
+                    <a href="{% url 'book_update' books.pk %}"><button class="btn btn-outline-success mx-2">Edit</button></a>
+                    <a href="{% url 'book_delete' books.pk %}"><button class="btn btn-outline-danger">Delete</button></a>
+                </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
+    
 
 {% endblock %}

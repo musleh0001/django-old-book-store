@@ -43,12 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'widget_tweaks',
     'rest_framework',
+    'crispy_forms',
 
     'dashboard.apps.DashboardConfig',
     'account.apps.AccountConfig',
     'order.apps.OrderConfig',
     'api.apps.ApiConfig',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [

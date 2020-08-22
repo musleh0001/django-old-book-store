@@ -70,7 +70,7 @@
                             <p class="card-text">by <strong>{{ book.author }}</strong></p>
                             <p class="card-text">{{ book.price }} TK</p>
                             <p class="card-text text-muted">{{ book.created_at|naturaltime}}</p>
-                            <a href="{% url 'order:AddToCart' book.pk %}" class="btn btn-primary" data-micron="pop">Add To Cart</a>
+                            <a href="{% url 'order:AddToCart' book.pk %}" class="btn btn-outline-primary" data-micron="pop"><img src="/static/img/cart.png" alt="cart" style="height: 20px;"></a>
                             <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary" data-micron="pop">see more</a>
                         </div>
                     </div>
