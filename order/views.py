@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreateBillingAddress
+from django.utils import timezone
 
 @login_required()
 def add_to_cart(request,id):    
@@ -158,3 +159,32 @@ class CartView(LoginRequiredMixin, View):
 		context = {'cart':cart, }
 	
 		return render(request, 'order/cart.html', context)
+
+def payment(request):
+	try:
+		cart = Cart.objects.filter(user = request.user, ordered=False)
+	except:
+		messages.info(request, "Your Don't have books in cart")
+		return redirect('/')
+
+	try:
+		billing =BillingAddress.objects.filter(user=request.user)
+	except:
+		messages.info(request, "You need to add a Billing Address")
+		return redirect('order:Checkout')
+
+	if cart.exists():
+		cart = cart[0]
+		billing = billing[0]
+		cart.billing_address = billing
+		cart.ordered_date = timezone.now()
+		cart.ordered = True
+		cart.save()
+		messages.info(request, "Your order completed, thanks")
+		return redirect('/')
+
+	messages.info(request, "Something went worong")
+	return redirect('/')
+
+
+	
