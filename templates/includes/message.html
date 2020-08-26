@@ -1,0 +1,11 @@
+<div style="margin-top: 84px;">
+
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" style="margin: 0mm;">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %} 
+
+</div>
